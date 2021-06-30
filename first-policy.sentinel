@@ -1,4 +1,4 @@
-mport "tfplan/v2" as tfplan
+import "tfplan/v2" as tfplan
 
 mandatory_labels = [
 	"ttl",
