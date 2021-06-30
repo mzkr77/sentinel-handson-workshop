@@ -1,0 +1,18 @@
+mport "tfplan/v2" as tfplan
+
+mandatory_labels = [
+	"ttl",
+]
+
+instances = filter tfplan.resource_changes as _, rc {
+	rc.mode is "managed" and
+		rc.type is "google_compute_instance"
+}
+
+tags = instances["google_compute_instance.vm_instance[0]"]["change"]["after"]["labels"]
+
+main = rule {
+	all mandatory_labels as t {
+		tags contains t
+	}
+}
